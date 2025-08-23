@@ -12,16 +12,26 @@ Rules:
 3. Do not add any empty lines between courses; each course follows immediately after the previous one.
 4. All courses should follow the same format, without any additions.
 
-Example:
-CS412
-1
-Tuesday - 8:00AM / 11:00AM
-Tuesday - 8:00AM / 11:00AM
-Wednesday - 9:00AM / 12:00PM
-CS411
-1
-Thursday - 9:00AM / 12:00PM
-Wednesday - 1:00PM / 4:00PM
+Example: 
+
+CS412 
+
+1 
+
+Tuesday - 8:00AM / 11:00AM 
+
+Tuesday - 8:00AM / 11:00AM 
+
+Wednesday - 9:00AM / 12:00PM 
+
+CS411 
+
+1 
+
+Thursday - 9:00AM / 12:00PM 
+
+Wednesday - 1:00PM / 4:00PM 
+
 Tuesday - 8:00AM / 11:00AM
 
 I want all courses formatted the same way.
