@@ -86,7 +86,6 @@ def create_schedule_table(selected_groups, courses):
                 if col_label in df.columns:
                     df.at[day, col_label] = f"{course_name}{lab_flag} {group}"
 
-    # Force pandas to print full table in terminal
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_columns", None)
     pd.set_option("display.width", None)
@@ -160,7 +159,7 @@ def main():
                 off_days = [d for d in DAYS if d not in used_days]
 
                 print(f"--- Schedule {idx} | OFF Days: {', '.join(off_days) if off_days else '-'} ---")
-                table = create_schedule_table(selected_groups, courses)  # نمرّر dict الصحيح مع الكورس times
+                table = create_schedule_table(selected_groups, courses) 
                 print(table, "\n")
         else:
             print("\nNo schedule found matching the exact OFF days and without conflicts.\n")
