@@ -59,7 +59,7 @@ def build_schedules(courses, course_list, desired_off_days, schedule=[], result=
 
     return all_solutions
 
-def create_schedule_table(schedule, selected_groups):
+def create_schedule_table(selected_groups, courses):
     min_hour = 8
     max_hour = 17
     hours = [f"{h}:00-{h+1}:00" for h in range(min_hour, max_hour)]
@@ -69,7 +69,11 @@ def create_schedule_table(schedule, selected_groups):
     for course, group in selected_groups.items():
         lab_flag = " L" if "Lab" in course else ""
         course_name = course.split()[0]
-        for t in schedule:
+        group_times = courses[course][group]  
+        
+        for t in group_times:
+            if t.strip() == "-":
+                continue
             day, period = t.split(" - ")
             if day not in DAYS:
                 continue
@@ -77,13 +81,12 @@ def create_schedule_table(schedule, selected_groups):
             start_hour = time_to_minutes(start_str) // 60
             end_hour = time_to_minutes(end_str) // 60
 
-            start_hour = max(start_hour, min_hour)
-            end_hour = min(end_hour, max_hour)
-
             for h in range(start_hour, end_hour):
                 col_label = f"{h}:00-{h+1}:00"
-                df.at[day, col_label] = f"{course_name} {group}{lab_flag}"
+                if col_label in df.columns:
+                    df.at[day, col_label] = f"{course_name}{lab_flag} {group}"
 
+    # Force pandas to print full table in terminal
     pd.set_option("display.max_rows", None)
     pd.set_option("display.max_columns", None)
     pd.set_option("display.width", None)
@@ -134,16 +137,21 @@ def input_courses():
     return courses
 
 def main():
-    courses = input_courses()
+    courses = input_courses()  
 
     while True:
-        desired_off_days = int(input("Number of OFF days desired: "))
+        try:
+            desired_off_days = int(input("Number of OFF days desired: "))
+        except ValueError:
+            print("Please enter a valid number for OFF days.")
+            continue
+
         course_list = list(courses.keys())
         all_solutions = build_schedules(courses, course_list, desired_off_days)
 
         if all_solutions:
             print(f"\nFound {len(all_solutions)} schedule(s) matching criteria:\n")
-            for idx, (sched, res) in enumerate(all_solutions, 1):
+            for idx, (sched, selected_groups) in enumerate(all_solutions, 1):
                 used_days = set()
                 for t in sched:
                     day = t.split(" - ")[0]
@@ -152,7 +160,7 @@ def main():
                 off_days = [d for d in DAYS if d not in used_days]
 
                 print(f"--- Schedule {idx} | OFF Days: {', '.join(off_days) if off_days else '-'} ---")
-                table = create_schedule_table(sched, res)
+                table = create_schedule_table(selected_groups, courses)  # نمرّر dict الصحيح مع الكورس times
                 print(table, "\n")
         else:
             print("\nNo schedule found matching the exact OFF days and without conflicts.\n")
