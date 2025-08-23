@@ -1,6 +1,6 @@
 To save time, you can use the following prompt with any LLM (e.g., ChatGPT) to organize schedules:
 
-I have X schedules and Y courses, and each course has Z separate time slots. I will give you the schedules and times, and I want you to organize each course in the following format:
+I have X schedules and Y courses, and Z courses has separate time slots. I will give you the schedules and times, and I want you to organize each course in the following format:
 
 Course Name
 Number of separate time slots
