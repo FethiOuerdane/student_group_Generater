@@ -252,15 +252,16 @@ const generateFakeData2 = () => {
         <div className="text-center space-y-4 sm:space-y-6">
           <div className="relative">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
-              Futuristic Schedule Builder
+              Schedule Builder
             </h1>
             <div className="absolute -inset-2 bg-gradient-to-r from-primary/10 to-accent/10 blur-2xl opacity-50 animate-pulse"></div>
           </div>
           <div className="flex items-center justify-center gap-2 flex-wrap">
             <Bot className="h-5 w-5 text-primary animate-bounce" />
             <p className="text-muted-foreground text-base sm:text-lg lg:text-xl text-balance">
-              Create conflict-free class schedules with advanced AI optimization
-            </p>
+ 
+  inspired by original scheduling logic from <span className="font-semibold">Joud Alshehri</span>.
+</p>
             <Sparkles className="h-5 w-5 text-accent animate-bounce delay-300" />
           </div>
         </div>
@@ -539,41 +540,7 @@ const generateFakeData2 = () => {
   <Sparkles className="h-4 w-4 mr-2" />
   Generate Fake Schedule Data
 </Button>
-<Button
-  onClick={() => {
-    const fakeSchedules: ScheduleResult[] = Array.from({ length: 3 }, (_, i) => {
-      const offDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 2) // 2 random off-days
-      const table: Record<string, Record<string, string>> = {}
 
-      const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]
-      const HOURS = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]
-
-      DAYS.forEach(day => {
-        table[day] = {}
-        HOURS.forEach(hour => {
-          table[day][hour] = Math.random() < 0.3 ? `Course ${Math.ceil(Math.random() * 10)}` : ""
-        })
-      })
-
-      return {
-        schedule: Object.fromEntries(
-          Array.from({ length: 10 }, (_, idx) => [`Course ${idx + 1}`, `Group ${Math.ceil(Math.random() * 2)}`])
-        ),
-        offDays,
-        table,
-      }
-    })
-
-    setSchedules(fakeSchedules)
-  }}
-  variant="outline"
-  className="mb-4 w-full sm:w-auto bg-gradient-to-r from-accent/30 to-primary/30 backdrop-blur-sm hover:from-accent/50 hover:to-primary/50 transition-all duration-300"
->
-  <Sparkles className="h-4 w-4 mr-2" />
-  Generate Fake Schedule Tables
-</Button>
 
           </CardContent>
         </Card>
