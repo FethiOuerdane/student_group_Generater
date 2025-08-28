@@ -15,4 +15,4 @@ I built the **UI and Next.js frontend** on top of that idea, using Tailwind, sha
 
 ## Acknowledgments
 - Original scheduling logic by **Joud Alshehri**
-- Next.js + UI implementation by **[Your Name]**
+- Next.js + UI implementation by **Fethi Ouerdane**
